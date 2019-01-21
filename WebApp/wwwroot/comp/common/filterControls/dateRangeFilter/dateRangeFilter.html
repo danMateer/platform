@@ -1,0 +1,31 @@
+﻿<div ng-controller="dateRangeFilterController">
+    <h4 class="filter-heading">{{metricFilter.shortTitle}}</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openStartDateCalendar()"><i class="fa fa-calendar"></i></button>
+                </span>
+                <input type="text" class="form-control" datetime-picker="{{dateTimeFormat}}"
+                       ng-model="model.fromValue" is-open="startDateCalendar.isOpen" enable-time="metricFilter.canSelectTime" placeholder="from date"
+                       uib-popover="Filter records by the dates events occurred, starting from a particular date."
+                       popover-title="{{metricFilter.shortTitle}}: Start"
+                       popover-trigger="'mouseenter'"
+                       popover-placement="left"/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openEndDateCalendar()"><i class="fa fa-calendar"></i></button>
+                </span>
+                <input type="text" class="form-control" datetime-picker="{{dateTimeFormat}}"
+                       ng-model="model.toValue" is-open="endDateCalendar.isOpen" enable-time="metricFilter.canSelectTime" placeholder="to date"
+                       uib-popover="Filter records by the dates events occurred, ending at a particular date."
+                       popover-title="{{metricFilter.shortTitle}}: End"
+                       popover-trigger="'mouseenter'"
+                       popover-placement="left"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿<div class="box">
+    <div class="box-title">
+        <h5>General search and filter</h5>
+    </div>
+    <div class="box-content search-box">
+        <form>
+            <div class="form-group" id="keyword-search">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" ng-model="ctrl.searchTerm"
+                           placeholder="find key words, numbers or serial numbers"
+                           uib-popover-template="'comp/home/projects/summary/popovers/_keywordSearch.html'"
+                           popover-title="General search and filter"
+                           popover-trigger="'mouseenter'"
+                           popover-placement="left"/>
+                </div>
+            </div>
+
+            <h4>Upload Date Range</h4>
+
+            <!-- date range -->
+            <div class="row" id="date-range-search">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.openStartDateCalendar()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                            <input class="form-control" type="text" name="start-date" ng-model="ctrl.startDate"
+                                   is-open="ctrl.startDateCalendar.isOpen" placeholder="from date"
+                                   uib-datepicker-popup="{{INPUT_DATE_FORMAT}}"
+                                   uib-popover="Filter records by the dates the records were uploaded (not necessarily the dates events occurred), starting from a particular date."
+                                   popover-title="Upload Range: Start Date"
+                                   popover-trigger="'mouseenter'"
+                                   popover-placement="left"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.openEndDateCalendar()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                            <input class="form-control" type="text" name="start-date" ng-model="ctrl.endDate" placeholder="to date"
+                                   uib-datepicker-popup="{{INPUT_DATE_FORMAT}}" is-open="ctrl.endDateCalendar.isOpen"
+                                   uib-popover="Filter records by the dates the records were uploaded (not necessarily the dates events occurred), ending at a particular date."
+                                   popover-title="Upload Range: End Date"
+                                   popover-trigger="'mouseenter'"
+                                   popover-placement="left"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Threads</h4>
+            <div id="threads-container">
+                <div class="checkbox checkbox-default" ng-repeat="template in ctrl.formTemplates track by $index">
+                    <input type="checkbox" id="{{template.id}}" ng-model="template.isChecked" />
+                    <label for="{{template.id}}">
+                        <span class="color-block" ng-style="{'background-color': ctrl.getTemplateColour(template.id)}"></span> {{template.title}}
+                    </label>
+                </div>
+
+                <p ng-if="!ctrl.formTemplates.length">No threads are present</p>
+            </div>
+
+            <!-- advanced search -->
+            <div ng-if="ctrl.metricFilters.length > 0">
+                <div class="metric-filter-content" ng-repeat="metricFilter in ctrl.metricFilters track by metricFilter.type+metricFilter.shortTitle">
+                    <div ng-include="'comp/common/filterControls/_filter/filter.html'" ng-controller="filterController"></div>
+                </div>
+            </div>
+
+            <div class="toolbox-buttons">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-primary" ng-click="ctrl.search()" ng-disabled="!ctrl.surveys.length">
+                            <i class="fa fa-search-plus"></i> <span class="hidden-xs">Search</span>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-default" ng-click="ctrl.clearAll()">
+                            <i class="fa fa-refresh"></i> <span class="hidden-xs">Reset</span>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group" ng-if="ctrl.project.allowExportPdf || ctrl.project.allowExportZip">
+                        <button class="btn btn-default" ng-click="ctrl.print()" ng-disabled="!ctrl.surveys.length">
+                            <i class="fa fa-print"></i> <span class="hidden-xs">Export</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

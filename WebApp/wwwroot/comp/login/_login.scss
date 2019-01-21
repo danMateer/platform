@@ -1,0 +1,33 @@
+﻿/// <reference path="../../lib/bootstrap-sass/assets/stylesheets/_bootstrap.scss" />
+@import "_particles.scss";
+
+.login {
+    padding-top: 13%;
+    
+    .panel {
+        opacity: .65;
+        transition: opacity ease-in-out .25s;
+    }
+
+    .panel:hover {
+        opacity: 1;
+    }
+}
+
+.login-page {
+    background-color: #2f4050;
+
+    h2, .copyright {
+        color: #f4f4f4;
+    }
+}
+
+.login_button {
+    background-color: transparent;
+    transition: all ease-in-out .25s;
+    color: #00a3e1;
+
+    & :hover {
+        background-color: inherit;
+    }
+}
