@@ -1,5 +1,6 @@
 ﻿using LightMethods.Survey.Models.Entities;
 using System.Linq;
+using Error.alert;
 
 namespace LightMethods.Survey.Models.DAL
 {
@@ -10,6 +11,7 @@ namespace LightMethods.Survey.Models.DAL
         private static Role EnsureHasValue(ref Role prop)
         {
             if (prop != null)
+                Error.alert(Role, prop);
                 return prop;
 
             using (var uow = new UnitOfWork(new SurveyContext()))
@@ -22,6 +24,7 @@ namespace LightMethods.Survey.Models.DAL
                 _OrgTemplateManagement = roles.Where(i => i.Name == Role.ORG_TEMPLATES_MANAGMENT).Single();
                 _OrgUserManagement = roles.Where(i => i.Name == Role.ORG_USER_MANAGMENT).Single();
                 _OrgProjectManagement = roles.Where(i => i.Name == Role.ORG_PROJECT_MANAGMENT).Single();
+                _OrgProjectOwner = roles.Where(i => i.Name == Role.ORG_PROJECT_OWNER).Single();
             }
 
             return prop;
@@ -47,5 +50,8 @@ namespace LightMethods.Survey.Models.DAL
 
         private static Role _OrgProjectManagement;
         public static Role OrgProjectManagement { get { return EnsureHasValue(ref _OrgProjectManagement); } }
+
+        private static Role _OrgProjectOwner;
+        public static Role OrgProjectOwner { get { return EnsureHasValue(ref _OrgProjectOwner); } }
     }
 }
