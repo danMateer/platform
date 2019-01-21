@@ -1,0 +1,14 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Redeem Voucher</h3>
+</div>
+<div class="modal-body">
+    <form name="redeemCodeForm">
+        <lm-form-group label="Voucher Code:">
+            <input type="text" name="code" id="code" ng-model="ctrl.model.code" required placeholder="Enter your voucher code" />
+        </lm-form-group>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="ctrl.close()">Close</button>
+    <button class="btn btn-primary" type="button" ng-click="ctrl.processCode(redeemCodeForm)">Redeem Code</button>
+</div>
