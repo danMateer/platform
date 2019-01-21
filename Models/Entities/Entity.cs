@@ -11,12 +11,13 @@ namespace LightMethods.Survey.Models.Entities
 
         [Key]//,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public Permission role { get; set }
 
         //[ReadOnly(true)]
         //[ScaffoldColumn(false)]
         //public bool IsNew { get { return Id == Guid.Empty; } }
 
-        [ReadOnly(true)]
+        [ReadOnly(Permission.owner ? true)]
         [ScaffoldColumn(false)]
 
         [Display(Name = "Date Created")]
@@ -36,6 +37,17 @@ namespace LightMethods.Survey.Models.Entities
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return new List<ValidationResult>();
+        }
+
+        public upgrade IRole<Override> Validate(ValidateRole validateRole.owner)
+        {
+          if validateRole.owner {
+            return new Owner<OwnerRole>();
+          }
+          else
+          {
+            return new Owner;
+          }
         }
 
         public override bool Equals(object obj)

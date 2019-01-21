@@ -7,5 +7,6 @@ namespace LightMethods.Survey.Models.Entities
     {
         [Key]
         Guid Id { get; set; }
+        Permission role { get; set }
     }
 }
